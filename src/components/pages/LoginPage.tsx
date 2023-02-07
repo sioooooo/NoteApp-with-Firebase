@@ -1,4 +1,4 @@
-import { Flex, Box, Input, Button, Stack } from "@chakra-ui/react";
+import { Flex, Box, Input, Stack } from "@chakra-ui/react";
 import { FC, memo } from "react";
 import { useNavigate } from "react-router-dom";
 import { LoginButton } from "../atoms/LoginButton";

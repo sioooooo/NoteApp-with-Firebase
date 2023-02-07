@@ -1,7 +1,6 @@
 import { Box, Button, Flex, IconButton } from "@chakra-ui/react";
-import { FC, memo, useState } from "react";
+import { FC, memo } from "react";
 import { useNoteHook } from "../../hooks/useNoteHook";
-
 import { NoteCard } from "../organisms/NoteCard";
 import { AddIcon } from "@chakra-ui/icons";
 

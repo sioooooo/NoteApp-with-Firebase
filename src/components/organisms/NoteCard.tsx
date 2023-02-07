@@ -1,12 +1,10 @@
 import {
   Box,
-  Button,
   Card,
   CardBody,
   CardHeader,
   Heading,
   Text,
-  useDisclosure,
 } from "@chakra-ui/react";
 import { FC, memo } from "react";
 import { NoteType } from "../../types/type";
@@ -22,7 +20,6 @@ type Props = {
 
 export const NoteCard: FC<Props> = memo((props) => {
   const { note, deleteNote, editUpNote, toggleModal } = props;
-  const { isOpen, onClose } = useDisclosure();
 
   const onClick = () => {
     toggleModal(note.id);
@@ -69,8 +66,6 @@ export const NoteCard: FC<Props> = memo((props) => {
       </Card>
 
       <ModalNote
-        onClose={onClose}
-        isOpen={isOpen}
         deleteNote={deleteNote}
         editUpNote={editUpNote}
         note={note}

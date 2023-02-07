@@ -4,7 +4,6 @@ import {
   Flex,
   Heading,
   IconButton,
-  Input,
   useDisclosure,
 } from "@chakra-ui/react";
 import { FC, memo } from "react";

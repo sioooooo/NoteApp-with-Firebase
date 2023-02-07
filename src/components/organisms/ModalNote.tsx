@@ -16,16 +16,13 @@ import { NoteType } from "../../types/type";
 
 type Props = {
   note: NoteType;
-  isOpen: boolean;
-  onClose: () => void;
   deleteNote: (id: string) => void;
   editUpNote: (key: string, value: string, note: NoteType) => void;
   toggleModal: (id: string) => void;
 };
 
 export const ModalNote: FC<Props> = memo((props) => {
-  //   console.log(notes);
-  const { isOpen, onClose, note, deleteNote, editUpNote, toggleModal } = props;
+  const { note, deleteNote, editUpNote, toggleModal } = props;
 
   const onClick = () => {
     toggleModal(note.id);
