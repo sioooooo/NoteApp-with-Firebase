@@ -28,6 +28,13 @@ export const NoteCard: FC<Props> = memo((props) => {
     toggleModal(note.id);
   };
 
+  const now = new Date(note.date);
+
+  const time = now.toLocaleDateString("ja-JP", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
   return (
     <>
       <Card
@@ -56,6 +63,7 @@ export const NoteCard: FC<Props> = memo((props) => {
         <CardBody display={{ base: "none", md: "block" }}>
           <Box minH="50px" overflow="hidden" whiteSpace="pre-wrap">
             <Text textOverflow="ellipsis">{note.text}</Text>
+            <p>{time}</p>
           </Box>
         </CardBody>
       </Card>

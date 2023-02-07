@@ -3,4 +3,5 @@ export type NoteType = {
   title: string;
   text: string;
   modal: boolean;
+  date: number;
 };

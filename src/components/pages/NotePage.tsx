@@ -7,7 +7,8 @@ import { AddIcon } from "@chakra-ui/icons";
 
 export const NotePage: FC = memo(() => {
   const { notes, addNote, deleteNote, editUpNote, toggleModal } = useNoteHook();
-  // const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const sortedNotes = notes.sort((a, b) => b.date - a.date);
 
   return (
     <>
@@ -24,7 +25,7 @@ export const NotePage: FC = memo(() => {
           w="100%"
           justifyContent="center"
         >
-          {notes.map((note) => {
+          {sortedNotes.map((note) => {
             return (
               <NoteCard
                 key={note.id}
@@ -56,17 +57,6 @@ export const NotePage: FC = memo(() => {
       </Box>
       {/* スマートフォン用　 */}
       <Box display={{ md: "none" }}>
-        {notes.map((note) => {
-          return (
-            <NoteCard
-              key={note.id}
-              note={note}
-              deleteNote={deleteNote}
-              editUpNote={editUpNote}
-              toggleModal={toggleModal}
-            />
-          );
-        })}
         <Flex w={{ base: "100%" }} h="100px" align="center" justify="center">
           <IconButton
             onClick={addNote}
@@ -78,6 +68,17 @@ export const NotePage: FC = memo(() => {
             icon={<AddIcon boxSize={7} />}
           />
         </Flex>
+        {sortedNotes.map((note) => {
+          return (
+            <NoteCard
+              key={note.id}
+              note={note}
+              deleteNote={deleteNote}
+              editUpNote={editUpNote}
+              toggleModal={toggleModal}
+            />
+          );
+        })}
       </Box>
     </>
   );
