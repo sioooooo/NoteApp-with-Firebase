@@ -60,9 +60,12 @@ export const NoteCard: FC<Props> = memo((props) => {
         <CardBody display={{ base: "none", md: "block" }}>
           <Box minH="50px" overflow="hidden" whiteSpace="pre-wrap">
             <Text textOverflow="ellipsis">{note.text}</Text>
-            <p>{time}</p>
+            <Text>{time}</Text>
           </Box>
         </CardBody>
+        <Box display={{ base: "block", md: "none" }}>
+          <Text p={2}>{time}</Text>
+        </Box>
       </Card>
 
       <ModalNote
