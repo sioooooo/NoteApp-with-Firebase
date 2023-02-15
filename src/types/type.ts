@@ -5,3 +5,10 @@ export type NoteType = {
   modal: boolean;
   date: number;
 };
+
+export type DataType = {
+  name: string;
+  email: string;
+  id: string;
+  notes: Array<NoteType>;
+};

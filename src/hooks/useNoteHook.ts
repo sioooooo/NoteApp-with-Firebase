@@ -1,28 +1,44 @@
+import { async } from "@firebase/util";
+import { collection, doc, onSnapshot, setDoc } from "firebase/firestore";
 import { useCallback, useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
-import { NoteType } from "../types/type";
+import { auth, db } from "../firebase/firebase";
+import { DataType, NoteType } from "../types/type";
 export const useNoteHook = () => {
-  const getItem = (key: string) => {
-    const value = localStorage.getItem(key);
-    if (value !== null) {
-      return value;
-    }
-    return "";
-  };
-
-  const getNotes = getItem("notes");
-
-  const initialState = JSON.parse(getNotes) as Array<NoteType>;
-
   const [notes, setNotes] = useState<Array<NoteType>>([]);
+  const [data, setData] = useState<DataType>();
+
+  const [userAuth] = useAuthState(auth);
+  const navigate = useNavigate();
+  const uid = userAuth?.uid;
+  const usersCollection = collection(db, "users");
 
   useEffect(() => {
-    setNotes(initialState);
+    getData();
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem("notes", JSON.stringify(notes));
-  }, [notes]);
+  const getData = async () => {
+    if (userAuth) {
+      const docRef = doc(usersCollection, uid);
+      const unsub = onSnapshot(docRef, (doc) => {
+        const newData = doc.data() as DataType;
+        setData(newData);
+        setNotes(newData.notes);
+      });
+    } else {
+      navigate("/login");
+    }
+  };
+
+  const storeNotes = (notes: Array<NoteType>) => {
+    const newData = {
+      ...data,
+      notes: [...notes],
+    };
+    setDoc(doc(usersCollection, uid), newData);
+  };
 
   const addNote = useCallback(() => {
     setNotes([
@@ -43,6 +59,7 @@ export const useNoteHook = () => {
         return note.id !== id;
       });
       setNotes(newNotes);
+      storeNotes(newNotes);
     },
     [notes]
   );
@@ -81,6 +98,7 @@ export const useNoteHook = () => {
       findNote!.modal = !findNote!.modal;
 
       setNotes(newNotes);
+      storeNotes(newNotes);
     },
     [notes]
   );
@@ -92,6 +110,7 @@ export const useNoteHook = () => {
     setNotes,
     editUpNote,
     toggleModal,
-    getItem,
+    getData,
+    data,
   };
 };

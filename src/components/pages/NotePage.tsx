@@ -1,11 +1,17 @@
 import { Box, Button, Flex, IconButton } from "@chakra-ui/react";
-import { FC, memo } from "react";
+import { FC, memo, useEffect, useState, useCallback } from "react";
 import { useNoteHook } from "../../hooks/useNoteHook";
 import { NoteCard } from "../organisms/NoteCard";
 import { AddIcon } from "@chakra-ui/icons";
+import { auth, db } from "../../firebase/firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { collection, doc, onSnapshot, setDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
+import { NoteType } from "../../types/type";
 
 export const NotePage: FC = memo(() => {
-  const { notes, addNote, deleteNote, editUpNote, toggleModal } = useNoteHook();
+  const { notes, addNote, deleteNote, editUpNote, toggleModal, data } =
+    useNoteHook();
 
   const sortedNotes = notes.sort((a, b) => b.date - a.date);
 

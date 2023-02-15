@@ -8,7 +8,7 @@ export const NoteRouter: FC = () => {
   return (
     <Routes>
       <Route path="/" element={<Header />}>
-        <Route path="/" element={<LoginPage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/note" element={<NotePage />} />
       </Route>
     </Routes>
