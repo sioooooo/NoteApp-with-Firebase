@@ -47,6 +47,9 @@ export const Header: FC = memo(() => {
           display={{ base: "none", md: "flex" }}
         >
           <Box pr={10} _hover={{ color: "gray.200" }}>
+            <Link to="/">ホーム</Link>
+          </Box>
+          <Box pr={10} _hover={{ color: "gray.200" }}>
             <Link to="login">ログイン</Link>
           </Box>
           <Box pr={4} _hover={{ color: "gray.200" }}>

@@ -28,10 +28,19 @@ export const DrawerMenu: FC<Props> = memo((props) => {
         <DrawerBody>
           <Stack spacing={7}>
             <Box pr={10} _hover={{ color: "gray.200" }}>
-              <Link to="">ログイン</Link>
+              <Link to="/" onClick={onClose}>
+                ホーム
+              </Link>
+            </Box>
+            <Box pr={10} _hover={{ color: "gray.200" }}>
+              <Link to="login" onClick={onClose}>
+                ログイン
+              </Link>
             </Box>
             <Box pr={4} _hover={{ color: "gray.200" }}>
-              <Link to="note">ノート</Link>
+              <Link to="note" onClick={onClose}>
+                ノート
+              </Link>
             </Box>
           </Stack>
         </DrawerBody>
